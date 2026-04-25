@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import{ useState } from 'react';
 import './App.css';
-
+import Imagecard from './components/Imagecard';
+import {userData} from'./constant/constant';
 function App() {
+  const [showFlag, setShowFlag]=useState(null);
+  const clickHandler = (Id) =>{
+    showFlag? setShowFlag(null) : setShowFlag(Id);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        userData.map((user) => (
+          <div key={user.githubId}>
+          <Imagecard
+            name={user.name}
+            imgLink={`https://avatars.githubusercontent.com/u/${user.githubId}`}
+          />
+          <h3 style={{ cursor: 'pointer' }} onClick={()=>clickHandler(user.githubId)}>{user.isstudent ?"student":"mentor"}⬇️⬇️⬇️</h3>
+          {showFlag===user.githubId &&(<p>{user.bioDescription}</p>)}
+          </div>
+        ))
+      }
     </div>
   );
 }
