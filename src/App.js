@@ -1,7 +1,7 @@
 import{ useState } from 'react';
 import './App.css';
 import Imagecard from './components/Imagecard';
-import {userData} from'./constant/constant';
+import {userData} from'./constants/constant';
 function App() {
   const [showFlag, setShowFlag]=useState(null);
   const clickHandler = (Id) =>{
